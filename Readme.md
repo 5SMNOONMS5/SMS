@@ -4,21 +4,17 @@
 
 #### In composer.json
 
-* Add in the **require** block
+* Add below code into the **require** block
 
-```
+```json
 "require": {
-        .
-        .
-        .
-        .
         "maxin/sms" : "dev-master"
     }
 ```
 
-* Add in the **repositories** block
+* Add below code into the **repositories** block
 
-```
+```json
  "repositories ": [
         {
             "name" : "maxin/sms",
@@ -32,19 +28,12 @@
 
 * Add SMSServiceProvider
 
-```
+```php
 /*
  * Package Service Providers...
  */
-.
-.
-Maxin\SMS\SMSServiceProvider::class,
-.
-.
 
-/*
- * Application Service Providers...
- */
+Maxin\SMS\SMSServiceProvider::class,
 
 ```
 
@@ -52,12 +41,13 @@ Maxin\SMS\SMSServiceProvider::class,
 
 * Publish config asset from sms packages
 
-```bash 
+```bash
 php artisan vendor:publish
 ```
 
 * Select Provider
-```
+
+```bash
 Maxin\Sms\SMSServiceProvider
 ```
 
