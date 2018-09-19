@@ -1,0 +1,36 @@
+{
+    "name": "maxin/sms",
+    "description": "Short message service package for internal use only",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://gitlab.fcmvp.com/maxin",
+    "authors": [
+        {
+            "name": "stephen",
+            "email": "tasb00429@gmail.com"
+        }
+    ],
+    "require-dev": {        
+        
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"  
+    },
+    "autoload": {
+        "psr-4": {
+          "Maxin\\Sms\\": "src/"
+      }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Maxin\\Sms\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Maxin\\Sms\\SMSServiceProvider"
+            ]
+        }
+    }
+}
