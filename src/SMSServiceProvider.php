@@ -3,6 +3,7 @@
 namespace Maxin\Sms;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Socialite\Contracts\Factory;
 
 class SMSServiceProvider extends ServiceProvider
 {
@@ -18,6 +19,10 @@ class SMSServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/sms.php' => config_path('sms.php')
         ]);
+
+        $this->bootDatabase();
+
+        $this->bootModels();
     }
 
     /**
@@ -29,6 +34,35 @@ class SMSServiceProvider extends ServiceProvider
      */
     public function register()
     {    
-        // $this->loadViewsFrom(__DIR__.'/Config', '');
+  
     }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [Factory::class];
+    }
+
+    private function bootDatabase()
+    {
+        $this->publishes([
+            __DIR__.'/../database/seeds/'      => database_path('seeds'),
+            __DIR__.'/../database/migrations/' => database_path('migrations'),
+            __DIR__.'/../database/faker/'      => app_path(),
+            __DIR__.'/../database/factory/'    => database_path('factories')
+        ], "SMS");
+    }
+
+    private function bootModels() 
+    {
+        $this->publishes([
+            __DIR__.'/Models/'      => app_path("Http"),
+        ], "SMS");
+    }
+
 }
+

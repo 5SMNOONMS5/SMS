@@ -2,6 +2,7 @@
 namespace Maxin\Sms\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use Laravel\Socialite\Contracts\Factory;
 
 class SMS extends Facade
 {
@@ -10,5 +11,8 @@ class SMS extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'SMS'; }
+    protected static function getFacadeAccessor() 
+    {
+    	return Factory::class;
+    }
 }

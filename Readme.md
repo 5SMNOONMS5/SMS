@@ -51,7 +51,16 @@ php artisan vendor:publish
 Maxin\Sms\SMSServiceProvider
 ```
 
-* It will copy File [/vendor/maxin/sms/config/sms.php] To [/config/sms.php]
+* It will copy those into given location inculdes **config**, **database needs** (seeder, migration, factory, faker) and **Models**.
+
+```bash
+Copied File [/packages/maxin/sms/config/sms.php] To [/config/sms.php]
+Copied Directory [/packages/maxin/sms/database/seeds] To [/database/seeds]
+Copied Directory [/packages/maxin/sms/database/migrations] To [/database/migrations]
+Copied Directory [/packages/maxin/sms/database/faker] To [/app]
+Copied Directory [/packages/maxin/sms/database/factory] To [/database/factories]
+Copied Directory [/packages/maxin/sms/src/Models] To [/app/Http]
+```
 
 ## Start
 
