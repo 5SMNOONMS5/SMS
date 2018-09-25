@@ -52,15 +52,15 @@ class SMSServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/seeds/'      => database_path('seeds'),
             __DIR__.'/../database/migrations/' => database_path('migrations'),
-            __DIR__.'/../database/faker/'      => app_path(),
-            __DIR__.'/../database/factory/'    => database_path('factories')
+            __DIR__.'/../database/factory/'    => database_path('factories'),
+            __DIR__.'/../database/faker/'      => app_path()
         ], "SMS");
     }
 
     private function bootModels() 
     {
         $this->publishes([
-            __DIR__.'/Models/'      => app_path("Http"),
+            __DIR__.'/../models/' => app_path("Http"),
         ], "SMS");
     }
 

@@ -51,9 +51,46 @@ php artisan vendor:publish
 Maxin\Sms\SMSServiceProvider
 ```
 
-* It will copy those into given location inculdes **config**, **database needs** (seeder, migration, factory, faker) and **Models**.
+* It will copy File [/vendor/maxin/sms/config/sms.php] To [/config/sms.php]
 
-## Start
+## Start 
+
+#### Nexmo
+
+```php
+
+use Maxin\Sms\SMSManager;
+
+$sms = SMSManager::provider('nexmo')
+        ->setPrerequisite()
+        ->setQueryParameters('Your number', 'Text here')
+        ->send()
+        ->sms();
+```
+
+#### Yunpian
+
+```php
+
+use Maxin\Sms\SMSManager;
+use Maxin\Sms\Providers\YunpianConfig;
+
+$text = urlencode('#name#').'='.urlencode("asd").'&'.urlencode('#order#').'='.urlencode("123");
+
+$sms = SMSManager::provider('yunpian')
+->setPrerequisite(YunpianConfig::TEMPLATE[YunpianConfig::REQUIRE_PARAMETERS], 
+                  YunpianConfig::TEMPLATE[YunpianConfig::ENDPOINT])
+->setQueryParameters('13049080495', $text, [
+    'tpl_id'    => '2478804',
+    'tpl_value' => $text
+])
+->send()
+->sms();
+```
+
+
+
+
 
 
 

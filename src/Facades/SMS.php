@@ -13,6 +13,6 @@ class SMS extends Facade
      */
     protected static function getFacadeAccessor() 
     {
-    	return Factory::class;
+    	return "SMS";
     }
 }
