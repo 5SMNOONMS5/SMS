@@ -113,8 +113,8 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
         // dd($response);
 
         /// Error
-        if (array_key_exists('error-text', $response) || $response['status'] !== self::SUCCESS_CODE) {
-            return (new Error($this->getStaticClassName()))->map([
+        if (array_key_exists('error-text', $response) && $response['status'] !== self::SUCCESS_CODE) {
+            return (new Error($this->getProviderName()))->map([
                 'code'    => (string)$message['status'],
                 'message' => $message['error-text'],
             ]);

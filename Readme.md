@@ -45,7 +45,7 @@ Maxin\SMS\SMSServiceProvider::class,
 php artisan vendor:publish
 ```
 
-* Select Provider or **SMS** tag
+* Select **Provider** or **SMS** tag
 
 ```bash
 Maxin\Sms\SMSServiceProvider

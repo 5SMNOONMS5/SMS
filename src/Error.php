@@ -35,7 +35,7 @@ class Error
 
     public function __construct($provider)
     {
-        $this->setProvider($provider);
+        $this->provider = $provider;
     }
 
     /**
