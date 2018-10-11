@@ -18,11 +18,11 @@ class SMSServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/sms.php' => config_path('sms.php')
-        ]);
+        ], "SMS");
 
         $this->bootDatabase();
 
-        $this->bootModels();
+        $this->bootModel();
     }
 
     /**
@@ -47,6 +47,11 @@ class SMSServiceProvider extends ServiceProvider
         return [Factory::class];
     }
 
+    /**
+     * Bootstrap databases
+     * 
+     * @return void
+     */
     private function bootDatabase()
     {
         $this->publishes([
@@ -57,7 +62,12 @@ class SMSServiceProvider extends ServiceProvider
         ], "SMS");
     }
 
-    private function bootModels() 
+    /**
+     * Bootstrap models
+     * 
+     * @return void
+     */
+    private function bootModel() 
     {
         $this->publishes([
             __DIR__.'/../models/' => app_path("Http"),

@@ -15,12 +15,20 @@ class CreateSmsTemplate extends Migration
      */
     public function up()
     {
-        Schema::connection('central')->create($this->table, function (Blueprint $table) {
+        Schema::create($this->table, function (Blueprint $table) {
+        // Schema::connection('central')->create($this->table, function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('content', 255)->nullable()->comment('短信模板內容');
+
+                $table->integer('account_id')->comment('帳號的 id');          
+                $table->integer('provider_template_id')->comment('廠商上的模板 id ');          
+
+                $table->string('content', 255)->comment('短信模板內容');
+                $table->string('rule', 20)->comment('變數內容，用，分隔');
+                $table->string('sign', 10)->nullable()->comment('簽名檔');
+
                 $table->timestamp('updated_at');
                 $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-                $table->softDeletes()->comment('無效|空號');
+                $table->softDeletes()->comment('可能被禁用的模板');
             }
         );
     }
@@ -32,6 +40,7 @@ class CreateSmsTemplate extends Migration
      */
     public function down()
     {
-        Schema::connection('central')->dropIfExists($this->table);
+        Schema::dropIfExists($this->table);
+        // Schema::connection('central')->dropIfExists($this->table);
     }
 }

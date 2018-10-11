@@ -5,7 +5,7 @@ namespace Maxin\Sms\Factory;
 use App;
 use InvalidArgumentException;
 
-class SMSProviderFactory 
+class SMSProviderFactory
 {
 	/**
      * Get a provider instance.
@@ -21,7 +21,7 @@ class SMSProviderFactory
 			throw new InvalidArgumentException('No provider was specified.');
 		}
 
-		$instancePath = config('sms.' . $provider .'.class');
+		$instancePath = config('sms.' . strtolower($provider) .'.class');
 
 		if (is_null($instancePath)) {
             throw new InvalidArgumentException(sprintf(

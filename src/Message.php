@@ -2,9 +2,7 @@
 
 namespace Maxin\Sms;
 
-use Maxin\Sms\Factory\SMSProviderFactory;
-
-class SMS
+class Message
 {	
     public function __construct($provider)
     {
@@ -40,7 +38,7 @@ class SMS
     public $errorMessage;
 
     /**
-     * Which provider sent it
+     * Provider name
      *
      * @var string
      */
@@ -61,7 +59,7 @@ class SMS
     public $count;
 
     /**
-     * The destination number
+     * The code from each provider 
      *
      * @var string
      */
