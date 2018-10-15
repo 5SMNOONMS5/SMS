@@ -1,6 +1,6 @@
 # SMS Package
 
-## Installation
+## Installation Steps
 
 #### In composer.json
 
@@ -42,30 +42,14 @@ Maxin\SMS\SMSServiceProvider::class,
 * Publish config asset from sms packages
 
 ```bash
-php artisan vendor:publish
-```
-
-* Select **Provider** or **SMS** tag
-
-```bash
-Maxin\Sms\SMSServiceProvider
-```
-
-* It will copy some files from packages to your project
-
-```bash
-Copied Directory [/vendor/maxin/sms/database/seeds] To [/database/seeds]
-Copied Directory [/vendor/maxin/sms/database/migrations] To [/database/migrations]
-Copied Directory [/vendor/maxin/sms/database/factory] To [/database/factories]
-Copied Directory [/vendor/maxin/sms/database/faker] To [/app]
-Copied Directory [/vendor/maxin/sms/models] To [/app/Http]
+php artisan vendor:publish --provider="Maxin\Sms\SMSServiceProvider" --tag="SMS"
 ```
 
 ## Before Start
 
 * Remember to run the migration and seed.
 
-* Offer provider keys inside config/sms.php.
+* Fill provider keys inside **config/sms.php**.
 
 * Import
 ```
@@ -76,7 +60,7 @@ use Maxin\Sms\SMSManager;
 
 #### Nexmo
 
-###### sending SMS
+* Sending SMS
 
 ```php
 $message = SMSManager::provider('nexmo')
@@ -86,7 +70,7 @@ $message = SMSManager::provider('nexmo')
 ->getMessageObject();
 ```
 
-###### Fetch Account infos
+* Fetch balance infos
 
 ```php
 $message = SMSManager::provider('nexmo')
@@ -98,7 +82,7 @@ $message = SMSManager::provider('nexmo')
 
 #### Yunpian
 
-###### sending SMS
+* Sending SMS
 
 ```php
 $messageObject = SMSManager::provider('yunpian')
@@ -108,7 +92,7 @@ $messageObject = SMSManager::provider('yunpian')
 ->getMessageObject();
 ```
 
-###### Fetch Account infos
+* Fetch account infos
 
 ```php
 $accountObject = SMSManager::provider('yunpian')
