@@ -1,0 +1,38 @@
+{
+    "name": "tasb00429/sms",
+    "description": "Integrates Nexmo and Yunpian APIs into a single interface for different projects",
+    "type": "library",
+    "keywords": ["laravel", "sms", "nexmo", "yunpian"],
+    "license": "MIT",
+    "homepage": "https://github.com/5SMNOONMS5/SMS",
+    "authors": [
+        {
+            "name": "5SMNOONMS5",
+            "email": "tasb00429@gmail.com"
+        }
+    ],
+    "require-dev": {        
+        "phpunit/phpunit": "~5.0"
+    },
+    "require": {
+        "php": ">=7.0.0",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+          "Tasb00429\\Sms\\": "src/"
+      }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tasb00429\\Sms\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tasb00429\\Sms\\SMSServiceProvider"
+            ]
+        }
+    }
+}
