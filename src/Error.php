@@ -33,7 +33,7 @@ class Error
      */
     public $detail;
 
-    public function __construct($provider)
+    public function __construct($provider = "")
     {
         $this->provider = $provider;
     }

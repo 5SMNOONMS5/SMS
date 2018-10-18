@@ -10,6 +10,8 @@ use Maxin\Sms\Error;
 
 class MessageAPI extends AbstractAPI implements MessageAPIInterface
 {
+    private $sendMessage;
+
     /**
      * Success code for each provider
      */
@@ -37,15 +39,16 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
      * @param  array  $parameters
      * @return self
      */
-    public function setParameters(int $number, string $text)
+    public function setParameters($number, $text)
     {   
         $number = $this->formatChinaCallingCode($number);
+        $this->sendMessage = $text;
              
         $this->parameters = [
             'api_key'    => $this->getConfigValue('key'),
             'api_secret' => $this->getConfigValue('secret'),
             'from'       => "test",
-            'to'         => (int)$number,
+            'to'         => $number,
             'text'       => $text,
             'type'       => 'unicode'
         ];
@@ -124,6 +127,8 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
         return $message->map([
             'count'        => $rawData['message-count'],
             'number'       => $response['to'],
+            'sendMessage'  => $this->sendMessage,
+            'currency'     => "USD",
             'code'         => (string)$response['status'],
             'fee'          => $response['message-price'],
             'message'      => $response['message-id'],

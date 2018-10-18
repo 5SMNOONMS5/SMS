@@ -10,6 +10,8 @@ use Maxin\Sms\Error;
 
 class MessageAPI extends AbstractAPI implements MessageAPIInterface
 {
+    private $sendMessage;
+
     /**
      * Success code for each provider
      * cf. https://www.yunpian.com/doc/zh_CN/returnValue/common.html
@@ -45,6 +47,8 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
             'mobile' => $number,
             'text'   => $text,
         ];
+
+        $this->sendMessage = $text;
 
         return $this;
     }
@@ -108,11 +112,13 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
 
         /// Success
         return $message->map([
-            'message' => $rawData['msg'],
-            'code'    => (string)$rawData['code'],
-            'number'  => $rawData['mobile'],
-            'fee'     => $rawData['fee'],
-            'count'   => $rawData['count'],
+            'sendMessage' => $this->sendMessage,
+            'message'     => $rawData['msg'],
+            'code'        => (string)$rawData['code'],
+            'currency'    => $rawData['unit'],
+            'number'      => $rawData['mobile'],
+            'fee'         => $rawData['fee'],
+            'count'       => $rawData['count'],
         ]);
     }
 

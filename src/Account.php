@@ -46,7 +46,7 @@ class Account
      */
     public $autoload;
 
-    public function __construct($provider)
+    public function __construct($provider = "")
     {
         $this->setProvider($provider);
     }

@@ -26,6 +26,7 @@ class CreateSmsLog extends Migration
                 
                 $table->string('content', 255)->comment('發送內容');
                 $table->string('phone', 32)->comment('電話號碼加密');
+                $table->string('currency', 10)->comment('貨幣');
                 
                 $table->unsignedTinyInteger('department')->default('1')->comment('0 系統,1 電銷');
                 $table->unsignedTinyInteger('status')->default('2')->comment('發送狀態 0 失敗,1 成功, 2 尚未發送');

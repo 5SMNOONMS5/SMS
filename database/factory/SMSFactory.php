@@ -12,6 +12,7 @@ $factory->define(SMSLog::class, function (Faker $faker) {
             'account_id'           => 0,
             'fee'                  => $faker->numberBetween(0.001, 0.01),
             'phone'                => $faker->e164PhoneNumber(),
+            'currency'             => $faker->randomElement($array = array ("RMB", "USD")),
             'content'              => $faker->realText(10, 2),
             'department'           => $faker->randomElement($array = array (0, 1)),
             'status'               => $faker->randomElement($array = array('0', '1', '2')),
