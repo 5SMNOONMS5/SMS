@@ -48,7 +48,7 @@ class Account
 
     public function __construct($provider = "")
     {
-        $this->setProvider($provider);
+        $this->provider = $provider;
     }
 
     public function map(array $attributes)

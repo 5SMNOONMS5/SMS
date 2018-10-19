@@ -6,7 +6,7 @@ class Message
 {   
     public function __construct($provider = "")
     {
-        $this->setProvider($provider);
+        $this->provider = $provider;
     }
 
     /**
