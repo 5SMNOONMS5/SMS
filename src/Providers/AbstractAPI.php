@@ -64,7 +64,8 @@ abstract class AbstractAPI
         ]);
 
         $response = $client->request('POST', $this->getRequestURL(), [
-            RequestOptions::BODY => http_build_query($this->parameters)
+            RequestOptions::BODY        => http_build_query($this->parameters),
+            RequestOptions::HTTP_ERRORS => false
         ]);
 
         $this->response = json_decode($response->getBody(), true);
