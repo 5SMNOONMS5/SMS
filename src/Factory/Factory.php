@@ -21,7 +21,8 @@ class SMSProviderFactory
 			throw new InvalidArgumentException('No provider was specified.');
 		}
 
-		$instancePath = config('sms.' . strtolower($provider) .'.class');
+        $config       = config('sms.' . strtolower($provider));
+        $instancePath = $config['class'];
 
 		if (is_null($instancePath)) {
             throw new InvalidArgumentException(sprintf(

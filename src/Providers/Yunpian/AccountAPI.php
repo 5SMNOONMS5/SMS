@@ -14,7 +14,7 @@ class AccountAPI extends AbstractAPI implements AccountAPIInterface
     public function getRequireParameters()
     {
         return ['apikey'];
-    }
+    } 
 
     /**
      * {@inheritdoc}
@@ -32,6 +32,10 @@ class AccountAPI extends AbstractAPI implements AccountAPIInterface
      */
     public function setParameters()
     {   
+        if ($this->account === '') {
+            
+        }
+
         $this->parameters = [
             'apikey'    => $this->getConfigValue('key')
         ];

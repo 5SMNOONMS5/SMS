@@ -31,7 +31,11 @@ abstract class AbstractAPI
     /**
      * Current activity account
      */
-    public $account    = [];
+    public $account    = "";
+
+
+
+    public $config     = [];
 
     /**
      * Get require parameters
@@ -53,6 +57,11 @@ abstract class AbstractAPI
      * @return self
      */
     abstract public function request();
+
+    public function __construct($config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * implement http post request via Guzzle HTTP client
@@ -97,12 +106,10 @@ abstract class AbstractAPI
      *
      * @return self
      */
-    public function setAccount(string $account)
+    public function setAccount(string $account = '')
     {
         $class = $this->getProviderName();
-        $value = config('sms.' . strtolower($class) . '.' . $key);
-
-
+        return $this->getConfigValue('accounts');
     }   
 
 	/**
