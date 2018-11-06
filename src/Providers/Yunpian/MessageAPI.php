@@ -104,10 +104,10 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
         /// Error
         if (array_key_exists('detail', $rawData) && $rawData['code'] !== self::SUCCESS_CODE) {
             return (new Error($this->getProviderName()))->map([
-              'message' => $rawData['msg'],
-              'code'    => (string)$rawData['code'],
-              'detail'  => $rawData['detail'],
-            ]);   
+                'message'     => $rawData['msg'],
+                'code'        => (string)$rawData['code'],
+                'detail'      => $rawData['detail'],
+            ]);
         }
 
         /// Success

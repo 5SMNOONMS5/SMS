@@ -2,10 +2,9 @@
 
 namespace Maxin\Sms\Providers\Yunpian;
 
+use Maxin\Sms\Account;
 use Maxin\Sms\Providers\AbstractAPI;
 use Maxin\Sms\Contracts\AccountAPIInterface;
-
-use Maxin\Sms\Account;
 
 class AccountAPI extends AbstractAPI implements AccountAPIInterface
 {

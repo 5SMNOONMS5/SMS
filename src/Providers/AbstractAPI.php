@@ -9,27 +9,32 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use GuzzleHttp\Exception\GuzzleException;
 
-abstract class AbstractAPI 
+abstract class AbstractAPI
 {	
     /**
-     * The custom parameters to be sent with the request.
+     * Parameters that sent within the request
      *
      * @var array
      */
     public $parameters = [];
 
     /**
-     * Response Data from each provider
+     * Response data 
      */
     public $response   = [];
 
     /**
-     * Response Data from each provider
+     * Request url
      */
     public $url        = [];
 
     /**
-     * Get require request parameters
+     * Current activity account
+     */
+    public $account    = [];
+
+    /**
+     * Get require parameters
      *
      * @return self
      */
@@ -87,6 +92,19 @@ abstract class AbstractAPI
         return $this;
     }
 
+    /**
+     * Set request account especially when provdier supprts more than an account.
+     *
+     * @return self
+     */
+    public function setAccount(string $account)
+    {
+        $class = $this->getProviderName();
+        $value = config('sms.' . strtolower($class) . '.' . $key);
+
+
+    }   
+
 	/**
      * Get value by given key in sms config file
      *
@@ -95,7 +113,7 @@ abstract class AbstractAPI
 	protected function getConfigValue($key) 
 	{	
 		$class = $this->getProviderName();
-        $value = config('sms.' . strtolower($class) . '.' . $key);
+        $value = config('sms.' . strtolower($class) . '.accounts.' . $key);
 
         if (is_null($value)) {
             throw new InvalidArgumentException(sprintf(
@@ -119,7 +137,7 @@ abstract class AbstractAPI
     }
 
 	/**
-     * Check wether all query parameters fulfill provider needs
+     * Check wether all query parameters fulfill api needs
      * 
      * @throws Exception
      */
@@ -134,7 +152,7 @@ abstract class AbstractAPI
 	}
 
     /**
-     * While http method is get, concatenate together with query parameter and given url
+     * While http method is get, concatenate between query parameter and given url
      * 
      * @return string
      */
@@ -144,7 +162,7 @@ abstract class AbstractAPI
 
         if (!$this->endsWith($this->getRequestURL(), '?')) {
             $queryString = '?';
-        } 
+        }
 
         foreach ($this->parameters as $key => $value) {
             $queryString = $queryString . $key . '=' . $value . '&';

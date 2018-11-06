@@ -3,10 +3,14 @@
 namespace Maxin\Sms;
 
 class Error
-{	
-	
+{		
+    public function __construct($provider = "")
+    {
+        $this->provider = $provider;
+    }
+
     /**
-     * Response message
+     * Response message from provider
      *
      * @var string
      */
@@ -32,11 +36,6 @@ class Error
      * @var string
      */
     public $detail;
-
-    public function __construct($provider = "")
-    {
-        $this->provider = $provider;
-    }
 
     /**
      * Map the given array onto the sms's properties.
