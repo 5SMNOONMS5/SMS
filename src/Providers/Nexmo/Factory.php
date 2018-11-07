@@ -8,16 +8,23 @@ use InvalidArgumentException;
 
 class Factory
 {
+    private $config;
+
+    public function __construct($config)
+    {
+        $this->config = $config;
+    }
+
     public function withAPI($name) {
 
         $instance = null;
 
         switch (strtolower($name)) {
             case "balance":
-                $instance = new BalanceAPI();
+                $instance = new BalanceAPI($this->config);
                 break;
             case "message":
-                $instance = new MessageAPI();
+                $instance = new MessageAPI($this->config);
                 break;
             default:
                 throw new InvalidArgumentException(sprintf(

@@ -16,9 +16,14 @@ return [
         'class'    => Maxin\Sms\Providers\Nexmo\Factory::class,
         'accounts' => [
             [
-                'name'   => '',
-                'key'    => 'e266a819',
-                'secret' => 'EJFJNDPZAAZb5vDY'
+                'name'   => 'account1',
+                'key'    => 'account1_key',
+                'secret' => 'account1_secret_key'
+            ],
+            [
+                'name'   => 'account2',
+                'key'    => 'account2_key',
+                'secret' => 'account2_secret_key'
             ],
             // Add more account here
         ]
@@ -30,11 +35,14 @@ return [
         'class'    => Maxin\Sms\Providers\Yunpian\Factory::class,
         'accounts' => [
             [
-                'name' => '',
-                'key'  => 'b7bfd7264151d75da63df1eb0efee5c7'
+                'name' => 'account1',
+                'key'  => 'account1_key'
+            ],
+            [
+                'name' => 'account2',
+                'key'  => 'account2_key'
             ],
             // Add more account here
         ]
-    ],
-
+    ]
 ];

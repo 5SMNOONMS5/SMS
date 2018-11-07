@@ -32,10 +32,6 @@ class AccountAPI extends AbstractAPI implements AccountAPIInterface
      */
     public function setParameters()
     {   
-        if ($this->account === '') {
-            
-        }
-
         $this->parameters = [
             'apikey'    => $this->getConfigValue('key')
         ];

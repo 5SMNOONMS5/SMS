@@ -33,8 +33,9 @@ abstract class AbstractAPI
      */
     public $account    = "";
 
-
-
+    /**
+     * Config values
+     */
     public $config     = [];
 
     /**
@@ -101,34 +102,29 @@ abstract class AbstractAPI
         return $this;
     }
 
-    /**
-     * Set request account especially when provdier supprts more than an account.
-     *
-     * @return self
-     */
-    public function setAccount(string $account = '')
-    {
-        $class = $this->getProviderName();
-        return $this->getConfigValue('accounts');
-    }   
-
 	/**
-     * Get value by given key in sms config file
-     *
-     * @return string 
+     * Get value by given key in sms config file, default is fisrt account
+     * 
+     * @return string
      */
 	protected function getConfigValue($key) 
 	{	
-		$class = $this->getProviderName();
-        $value = config('sms.' . strtolower($class) . '.accounts.' . $key);
-
-        if (is_null($value)) {
-            throw new InvalidArgumentException(sprintf(
-                'Unable to get [%s] from sms config file.', $key
-            ));
+        $accounts = $this->config['accounts'];
+        /// Get first account
+        $account  = reset($accounts);
+        
+        if ($this->account === '') {
+            return $account[$key];
         }
 
-		return $value;
+        foreach ($accounts as $value) {
+            if ($value['name'] === $this->account) {
+                $account = $value;
+                break;
+            }
+        }
+
+        return $account[$key];
 	}
 
     /**
@@ -151,6 +147,7 @@ abstract class AbstractAPI
 	protected function checkRequireParameters()
 	{
 		$diff = collect($this->getRequireParameters())->diff(array_keys($this->parameters));		
+
 		// dd($this->getRequireParameters(), array_keys($this->parameters), $diff);
 
 		if ($diff->count() != 0) {
@@ -181,7 +178,7 @@ abstract class AbstractAPI
     }
 
     /**
-     * Check end of given string match the specified character/string
+     * Check end of the given string match the specified character/string
      * 
      * @return boolean
      */
@@ -193,6 +190,26 @@ abstract class AbstractAPI
         }
 
         return (substr($haystack, -$length) === $needle);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * @param mixed $account
+     *
+     * @return self
+     */
+    public function setAccount($account)
+    {
+        $this->account = $account;
+
+        return $this;
     }
 }
 

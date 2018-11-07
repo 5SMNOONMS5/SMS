@@ -4,6 +4,8 @@ namespace Maxin\Sms\Factory;
 
 use App;
 use InvalidArgumentException;
+use Maxin\Sms\Providers\Nexmo\Factory as NexmoFactory;
+use Maxin\Sms\Providers\Yunpian\Factory as YunpianFactory; 
 
 class SMSProviderFactory
 {
@@ -11,7 +13,7 @@ class SMSProviderFactory
      * Get a provider instance.
      *
      * @param  string  $provider
-     * @return provider instance 
+     * @return provider instance factory
      *
      * @throws \InvalidArgumentException
      */
@@ -21,15 +23,15 @@ class SMSProviderFactory
 			throw new InvalidArgumentException('No provider was specified.');
 		}
 
-        $config       = config('sms.' . strtolower($provider));
-        $instancePath = $config['class'];
+        $config = config('sms.' . strtolower($provider));
+        $class  = $config['class'];
 
-		if (is_null($instancePath)) {
+		if (is_null($class)) {
             throw new InvalidArgumentException(sprintf(
-                'Unable to resolve NULL provider for [%s].', static::class
+                'Unable to resolve NULL provider class for [%s].', static::class
             ));
         }
 
-		return App::make($instancePath);
+        return (new $class($config));
 	}
 }
