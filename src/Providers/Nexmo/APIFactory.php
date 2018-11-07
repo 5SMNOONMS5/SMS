@@ -1,12 +1,13 @@
 <?php
 
-namespace Maxin\Sms\Providers\Yunpian;
+namespace Maxin\Sms\Providers\Nexmo;
 
-use Maxin\Sms\Providers\Yunpian\AccountAPI;
-use Maxin\Sms\Providers\Yunpian\MessageAPI;
+use Maxin\Sms\Providers\Nexmo\BalanceAPI;
+use Maxin\Sms\Providers\Nexmo\MessageAPI;
+use Maxin\Sms\Contracts\APIFactoryInterface;
 use InvalidArgumentException;
 
-class Factory
+class APIFactory implements APIFactoryInterface
 {
     private $config;
 
@@ -15,13 +16,16 @@ class Factory
         $this->config = $config;
     }
 
-    public function withAPI($name) {
-
+    /**
+     * {@inheritdoc}
+     */
+    public function withAPI(string $name): AbstractAPI
+    {
         $instance = null;
 
         switch (strtolower($name)) {
-            case "account":
-                $instance = new AccountAPI($this->config);
+            case "balance":
+                $instance = new BalanceAPI($this->config);
                 break;
             case "message":
                 $instance = new MessageAPI($this->config);
@@ -35,3 +39,4 @@ class Factory
         return $instance;
     }
 }
+

@@ -4,7 +4,6 @@ namespace Maxin\Sms\Providers\Nexmo;
 
 use Maxin\Sms\Providers\AbstractAPI;
 use Maxin\Sms\Contracts\AccountAPIInterface;
-
 use Maxin\Sms\Account;
 
 class BalanceAPI extends AbstractAPI implements AccountAPIInterface

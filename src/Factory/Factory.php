@@ -7,7 +7,10 @@ use InvalidArgumentException;
 use Maxin\Sms\Providers\Nexmo\Factory as NexmoFactory;
 use Maxin\Sms\Providers\Yunpian\Factory as YunpianFactory; 
 
-class SMSProviderFactory
+/*
+ * This factory generates provider 
+ */
+final class SMSProviderFactory
 {
 	/**
      * Get a provider instance.
