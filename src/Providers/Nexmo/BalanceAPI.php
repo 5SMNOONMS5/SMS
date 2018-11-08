@@ -13,7 +13,7 @@ class BalanceAPI extends AbstractAPI implements AccountAPIInterface
      */
     public function getRequireParameters()
     {
-        return ['api_key', 'api_secret2'];
+        return ['api_key', 'api_secret'];
     }
 
     /**
