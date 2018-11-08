@@ -59,6 +59,11 @@ abstract class AbstractAPI
      */
     abstract public function request();
 
+    /**
+     * Construct
+     *
+     * @return self
+     */   
     public function __construct($config)
     {
         $this->config = $config;
@@ -71,6 +76,8 @@ abstract class AbstractAPI
      */
     public function post()
     {
+        if (!$this->checkRequireParameters()) return; 
+
         $client = new Client([
             RequestOptions::HEADERS => [
                 'Accept'       => 'text/plain',
@@ -95,8 +102,10 @@ abstract class AbstractAPI
      */
     public function get()
     { 
-        $response = (new Client())->request('GET', $this->url);
+        if (!$this->checkRequireParameters()) return; 
 
+        $response = (new Client())->request('GET', $this->getRequestURL(), $this->parameters);
+        
         $this->response = json_decode($response->getBody(), true);
 
         return $this;
@@ -125,18 +134,6 @@ abstract class AbstractAPI
         }
 
         return $account[$key];
-	}
-
-    /**
-     * Returns the name of the provider
-     * 
-     * @return string
-     */
-    protected function getProviderName()
-    {
-        $classPath = explode("\\", static::class);
-        end($classPath);
-        return prev($classPath);
     }
 
 	/**
@@ -146,51 +143,20 @@ abstract class AbstractAPI
      */
 	protected function checkRequireParameters()
 	{
-		$diff = collect($this->getRequireParameters())->diff(array_keys($this->parameters));		
-
-		// dd($this->getRequireParameters(), array_keys($this->parameters), $diff);
-
-		if ($diff->count() != 0) {
-			throw new Exception('Missing Require Parameters '. $diff->values());
-		}
-	}
-
-    /**
-     * While http method is get, concatenate between query parameter and given url
-     * 
-     * @return string
-     */
-    protected function concatenateQueryString()
-    {   
-        $queryString = ''; 
-
-        if (!$this->endsWith($this->getRequestURL(), '?')) {
-            $queryString = '?';
+        $diff = [];
+        foreach (array_keys($this->parameters) as $value) {
+            if (!in_array($value, $this->getRequireParameters())) {
+                array_push($diff, $value);
+            }
         }
 
-        foreach ($this->parameters as $key => $value) {
-            $queryString = $queryString . $key . '=' . $value . '&';
+        if (count($diff) != 0) {
+            throw new Exception('Missing Require Parameters '. (implode(",", $diff)));
         }
 
-        $this->url = $this->getRequestURL() . $queryString;
-
-        // dd($this->parameters, $this->url);
+        return true;
     }
 
-    /**
-     * Check end of the given string match the specified character/string
-     * 
-     * @return boolean
-     */
-    private function endsWith($haystack, $needle)
-    {
-        $length = strlen($needle);
-        if ($length == 0) {
-            return true;
-        }
-
-        return (substr($haystack, -$length) === $needle);
-    }
 
     /**
      * @return mixed

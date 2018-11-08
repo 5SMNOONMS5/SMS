@@ -2,37 +2,30 @@
 
 namespace Maxin\Sms\Tests;
 
+use \Mockery;
 use PHPUnit\Framework\TestCase;
 use Maxin\Sms\Providers\AbstractAPI;
 
 abstract class AbstractTestCase extends TestCase
 {
- //    /**
- //     * Create a instance
- //     * @dataProvider fakeConfig
- //     * @test
- //     */
-	// abstract public function createInstance($fakeConfig);
+ 	/*
+     * Fake config values
+     */
+ 	abstract public function mockConfig();
 
- // 	/*
- //     * Fake config values
- //     */
- // 	abstract public function fakeConfig();
+    protected function setUp()
+    {
+        parent::setUp();
+    }
 
-	/**
-	 * Call protected/private method of a class.
-	 *
-	 * @param object &$object    Instantiated object that we will run method on.
-	 * @param string $methodName Method name to call
-	 * @param array  $parameters Array of parameters to pass into method.
-	 *
-	 * @return mixed Method return.
-	 */
-	public function invokeMethod(&$object, $methodName, array $parameters = array())
-	{
-		$reflection = new \ReflectionClass(get_class($object));
-		$method = $reflection->getMethod($methodName);
-		$method->setAccessible(true);
-		return $method->invokeArgs($object, $parameters);
+ 	protected function tearDown()
+    {
+        parent::tearDown();
+        $this->target = null;
+    }
+
+	public function initMock($object)
+	{		       
+        return Mockery::mock($object)->shouldAllowMockingProtectedMethods();
 	}
 }

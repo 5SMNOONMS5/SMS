@@ -13,7 +13,7 @@ class BalanceAPI extends AbstractAPI implements AccountAPIInterface
      */
     public function getRequireParameters()
     {
-        return ['api_key', 'api_secret'];
+        return ['api_key', 'api_secret2'];
     }
 
     /**
@@ -45,10 +45,6 @@ class BalanceAPI extends AbstractAPI implements AccountAPIInterface
      */
     public function request()
     {
-        $this->checkRequireParameters();
-
-        $this->concatenateQueryString();
-
         $this->get();
 
         return $this;
@@ -59,7 +55,7 @@ class BalanceAPI extends AbstractAPI implements AccountAPIInterface
      */
     public function getAccountObject()
     {
-        return $this->mapToAccountObject(new Account($this->getProviderName()), $this->response);
+        return $this->mapToAccountObject(new Account($this->getConfigValue('providerName')), $this->response);
     }
 
     /**

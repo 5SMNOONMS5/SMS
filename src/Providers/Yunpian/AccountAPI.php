@@ -56,7 +56,7 @@ class AccountAPI extends AbstractAPI implements AccountAPIInterface
      */
     public function getAccountObject()
     {
-        return $this->mapToAccountObject(new Account($this->getProviderName()), $this->response);
+        return $this->mapToAccountObject(new Account($this->getConfigValue('providerName')), $this->response);
     }
 
     /**

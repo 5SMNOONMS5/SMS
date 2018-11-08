@@ -4,6 +4,7 @@ namespace Maxin\Sms\Providers\Yunpian;
 
 use Maxin\Sms\Providers\Yunpian\AccountAPI;
 use Maxin\Sms\Providers\Yunpian\MessageAPI;
+use Maxin\Sms\Providers\AbstractAPI;
 use Maxin\Sms\Contracts\APIFactoryInterface;
 use InvalidArgumentException;
 
@@ -19,11 +20,11 @@ class APIFactory implements APIFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function withAPI(string $name): AbstractAPI
+    public function withAPI(string $api): AbstractAPI
     {
         $instance = null;
 
-        switch (strtolower($name)) {
+        switch (strtolower($api)) {
             case "account":
                 $instance = new AccountAPI($this->config);
                 break;

@@ -73,7 +73,7 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
      */
     public function getMessageObject()
     {
-        return $this->mapToMessageObject(new Message($this->getProviderName()), $this->response);
+        return $this->mapToMessageObject(new Message($this->getConfigValue('providerName')), $this->response);
     }
 
     /**
@@ -117,7 +117,7 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
 
         /// Error
         if (array_key_exists('error-text', $response) && $response['status'] !== self::SUCCESS_CODE) {
-            return (new Error($this->getProviderName()))->map([
+            return (new Error($this->getConfigValue('providerName')))->map([
                 'code'    => (string)$message['status'],
                 'message' => $message['error-text'],
             ]);

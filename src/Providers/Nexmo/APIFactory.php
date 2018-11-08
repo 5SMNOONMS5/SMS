@@ -4,6 +4,7 @@ namespace Maxin\Sms\Providers\Nexmo;
 
 use Maxin\Sms\Providers\Nexmo\BalanceAPI;
 use Maxin\Sms\Providers\Nexmo\MessageAPI;
+use Maxin\Sms\Providers\AbstractAPI;
 use Maxin\Sms\Contracts\APIFactoryInterface;
 use InvalidArgumentException;
 
@@ -19,11 +20,11 @@ class APIFactory implements APIFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function withAPI(string $name): AbstractAPI
+    public function withAPI(string $api): AbstractAPI
     {
         $instance = null;
 
-        switch (strtolower($name)) {
+        switch (strtolower($api)) {
             case "balance":
                 $instance = new BalanceAPI($this->config);
                 break;
