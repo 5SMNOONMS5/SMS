@@ -12,9 +12,9 @@ return [
 
     // Nexmo平台, cf. https://nexmo.com/
     'nexmo'  => [
-        'name'     => 'Nexmo',
-        'class'    => Maxin\Sms\Providers\Nexmo\APIFactory::class,
-        'accounts' => [
+        'providerName' => 'Nexmo',
+        'class'        => Maxin\Sms\Providers\Nexmo\APIFactory::class,
+        'accounts'     => [
             [
                 'name'   => 'account1',
                 'key'    => 'account1_key',
@@ -31,9 +31,9 @@ return [
 
     // 雲片平台, cf. https://nexmo.com/
     'yunpian' => [
-        'name'     => '雲片',
-        'class'    => Maxin\Sms\Providers\Yunpian\APIFactory::class,
-        'accounts' => [
+        'providerName' => '雲片',
+        'class'        => Maxin\Sms\Providers\Yunpian\APIFactory::class,
+        'accounts'     => [
             [
                 'name' => 'account1',
                 'key'  => 'account1_key'

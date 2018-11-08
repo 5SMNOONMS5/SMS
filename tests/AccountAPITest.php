@@ -11,6 +11,9 @@ final class AccountAPITest extends AbstractTestCase
     /** @var AccountAPITestStub */
     protected $target;
 
+    /*
+     * @dataprovider
+     */
     protected function setUp()
     {
         parent::setUp();
@@ -40,10 +43,9 @@ final class AccountAPITest extends AbstractTestCase
     }
 
     /**
-     * 
      * Create a instance
-     * @covers
      * @test
+     * @covers
      */
     public function 沒有設置帳號默認回傳第一個帳號的鑰匙()
     {   
@@ -51,7 +53,7 @@ final class AccountAPITest extends AbstractTestCase
         $expected = 'account1_key';
 
         /** act */
-        $result   = $this->target->getConfigValue('key');
+        $result   = $this->target->getAccountDetail('key');
     
         /** assert */
         $this->assertEquals($expected, $result);
@@ -61,14 +63,30 @@ final class AccountAPITest extends AbstractTestCase
      * Create a instance
      * @test
      */
-    public function 設置帳號回傳第二個帳號的鑰匙()
+    public function 測試回傳廠商的名字()
+    {   
+        /** arrange */ 
+        $expected = 'providerName';
+
+        /** act */
+        $result   = $this->target->getProviderName();
+        
+        /** assert */
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * Create a instance
+     * @test
+     */
+    public function 設置指定帳號之後則回傳第指定帳號的鑰匙()
     {   
         /** arrange */ 
         $this->target->setAccount('account2');
         $expected = 'account2_key';
 
         /** act */
-        $result   = $this->target->getConfigValue('key');
+        $result   = $this->target->getAccountDetail('key');
         
         /** assert */
         $this->assertEquals($expected, $result);

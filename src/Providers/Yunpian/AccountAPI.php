@@ -33,7 +33,7 @@ class AccountAPI extends AbstractAPI implements AccountAPIInterface
     public function setParameters()
     {   
         $this->parameters = [
-            'apikey'    => $this->getConfigValue('key')
+            'apikey'    => $this->getAccountDetail('key')
         ];
 
         return $this;
@@ -56,7 +56,7 @@ class AccountAPI extends AbstractAPI implements AccountAPIInterface
      */
     public function getAccountObject()
     {
-        return $this->mapToAccountObject(new Account($this->getConfigValue('providerName')), $this->response);
+        return $this->mapToAccountObject(new Account($this->getProviderName()), $this->response);
     }
 
     /**

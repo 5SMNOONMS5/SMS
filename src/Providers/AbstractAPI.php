@@ -112,11 +112,11 @@ abstract class AbstractAPI
     }
 
 	/**
-     * Get value by given key in sms config file, default is fisrt account
+     * Get value by the given key that under 'accounts' key in sms config file, 
      * 
      * @return string
      */
-	protected function getConfigValue($key) 
+	protected function getAccountDetail($key) 
 	{	
         $accounts = $this->config['accounts'];
         /// Get first account
@@ -134,6 +134,16 @@ abstract class AbstractAPI
         }
 
         return $account[$key];
+    }
+
+    /**
+     * Get provider name
+     * 
+     * @return string
+     */
+    public function getProviderName()
+    {
+        return $this->config['providerName'];
     }
 
 	/**

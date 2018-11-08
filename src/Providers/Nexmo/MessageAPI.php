@@ -45,8 +45,8 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
         $this->sendMessage = $text;
              
         $this->parameters = [
-            'api_key'    => $this->getConfigValue('key'),
-            'api_secret' => $this->getConfigValue('secret'),
+            'api_key'    => $this->getAccountDetail('key'),
+            'api_secret' => $this->getAccountDetail('secret'),
             'from'       => "test",
             'to'         => $number,
             'text'       => $text,
@@ -73,7 +73,7 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
      */
     public function getMessageObject()
     {
-        return $this->mapToMessageObject(new Message($this->getConfigValue('providerName')), $this->response);
+        return $this->mapToMessageObject(new Message($this->getProviderName()), $this->response);
     }
 
     /**
@@ -117,7 +117,7 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
 
         /// Error
         if (array_key_exists('error-text', $response) && $response['status'] !== self::SUCCESS_CODE) {
-            return (new Error($this->getConfigValue('providerName')))->map([
+            return (new Error($this->getProviderName()))->map([
                 'code'    => (string)$message['status'],
                 'message' => $message['error-text'],
             ]);
