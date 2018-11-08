@@ -30,10 +30,10 @@ class AccountAPI extends AbstractAPI implements AccountAPIInterface
      * @param  array  $parameters
      * @return self
      */
-    public function setParameters()
+    public function setParameters(string $apikey = null)
     {   
         $this->parameters = [
-            'apikey'    => $this->getAccountDetail('key')
+            'apikey' => ($apikey) ?: $this->getAccountDetail('key'),
         ];
 
         return $this;

@@ -39,15 +39,19 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
      * @param  array  $parameters
      * @return self
      */
-    public function setParameters($number, $text)
-    {   
+    public function setParameters($number, $text, 
+        string $from      = '',
+        string $apikey    = null,
+        string $apiSecret = null)
+    {
         $number = $this->formatChinaCallingCode($number);
+
         $this->sendMessage = $text;
              
         $this->parameters = [
-            'api_key'    => $this->getAccountDetail('key'),
-            'api_secret' => $this->getAccountDetail('secret'),
-            'from'       => "test",
+            'api_key'    => ($apikey)    ?: $this->getAccountDetail('key'),
+            'api_secret' => ($apiSecret) ?: $this->getAccountDetail('secret'),
+            'from'       => $from,
             'to'         => $number,
             'text'       => $text,
             'type'       => 'unicode'

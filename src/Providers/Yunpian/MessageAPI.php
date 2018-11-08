@@ -40,14 +40,13 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
      * @param  array  $parameters
      * @return self
      */
-    public function setParameters(int $number, string $text)
+    public function setParameters(int $number, string $text, string $apikey = null)
     {        
         $this->parameters = [
-            'apikey' => $this->getAccountDetail('key'),
+            'apikey' => ($apikey) ?: $this->getAccountDetail('key'),
             'mobile' => $number,
             'text'   => $text,
         ];
-             dd($this->parameters);
 
         $this->sendMessage = $text;
 

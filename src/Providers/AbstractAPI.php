@@ -104,7 +104,9 @@ abstract class AbstractAPI
     { 
         if (!$this->checkRequireParameters()) return; 
 
-        $response = (new Client())->request('GET', $this->getRequestURL(), $this->parameters);
+        $response = (new Client())->request('GET', $this->getRequestURL(), [
+            'query' => $this->parameters
+        ]);
         
         $this->response = json_decode($response->getBody(), true);
 

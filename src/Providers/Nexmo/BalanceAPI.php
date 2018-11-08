@@ -30,11 +30,11 @@ class BalanceAPI extends AbstractAPI implements AccountAPIInterface
      * @param  array  $parameters
      * @return self
      */
-    public function setParameters()
+    public function setParameters(string $apikey = null, string $apiSecret = null)
     {   
         $this->parameters = [
-            'api_key'    => $this->getAccountDetail('key'),
-            'api_secret' => $this->getAccountDetail('secret')
+            'api_key'    => ($apikey)    ?: $this->getAccountDetail('key'),
+            'api_secret' => ($apiSecret) ?: $this->getAccountDetail('secret')
         ];
 
         return $this;
