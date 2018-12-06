@@ -27,7 +27,7 @@ class AccountAPI extends AbstractAPI implements AccountAPIInterface
     /**
      * Set and map each parameter into provider special query keys
      *
-     * @param  array  $parameters
+     * @param  string  $apikey
      * @return self
      */
     public function setParameters(string $apikey = null)

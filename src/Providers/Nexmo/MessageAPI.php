@@ -36,7 +36,12 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
     /**
      * Set and map each parameter into provider special query keys
      *
-     * @param  array  $parameters
+     * @param  mix      $number
+     * @param  string   $text
+     * @param  string   $from
+     * @param  string   $apikey
+     * @param  string   $apiSecret
+     * 
      * @return self
      */
     public function setParameters($number, $text, 

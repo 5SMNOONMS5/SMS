@@ -37,10 +37,12 @@ class MessageAPI extends AbstractAPI implements MessageAPIInterface
     /**
      * Set and map each parameter into provider special query keys
      *
-     * @param  array  $parameters
+     * @param  mix      $number
+     * @param  string   $text
+     * @param  string   $apikey
      * @return self
      */
-    public function setParameters(int $number, string $text, string $apikey = null)
+    public function setParameters($number, string $text, string $apikey = null)
     {        
         $this->parameters = [
             'apikey' => ($apikey) ?: $this->getAccountDetail('key'),
